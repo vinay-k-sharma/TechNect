@@ -27,4 +27,8 @@ export const Links = [
     label: 'Register',
     slug: '/register',
   },
+  {
+    label: 'Signout',
+    slug: '/signout',
+  },
 ];
