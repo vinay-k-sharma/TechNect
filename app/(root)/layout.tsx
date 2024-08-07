@@ -1,6 +1,6 @@
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
-
+import { Toaster } from '@/components/ui/toaster';
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -10,7 +10,7 @@ export default function RootLayout({
     <div className="flex h-screen flex-col">
       <Header />
       <main className="flex-1">{children}</main>
-      {/* <Toaster /> */}
+      <Toaster />
       <Footer />
     </div>
   );

@@ -3,23 +3,36 @@ import React from 'react';
 import { Links } from '@/constants';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
+
 const Navitems = () => {
+  const { data: session } = useSession();
   const pathName = usePathname();
+
   return (
-    <ul className="md:flex-between flex w-full flex-col items-start gap-5 md:flex-row">
+    <ul className="sticky top-0 z-50 flex flex-wrap items-center gap-4 px-4 py-4 lg:px-24">
       {Links.map((link) => {
-        const isActive = pathName == link.slug;
+        if (link.slug === '/login' || link.slug === '/register') {
+          if (session) return null;
+        }
+        if (link.slug === '/signout') {
+          if (!session) return null;
+        }
+        const isActive = pathName === link.slug;
         return (
           <li
             key={link.slug}
-            className={`${isActive ? 'text-primary' : 'text-white'} flex-center p-medium-16 whitespace-nowrap`}
+            className={`${isActive ? 'text-primary' : 'text-white'} `}
           >
-            <Link href={link.slug}>{link.label}</Link>
+            {link.slug === '/signout' ? (
+              <button onClick={() => signOut()}>SignOut</button>
+            ) : (
+              <Link href={link.slug}>{link.label}</Link>
+            )}
           </li>
         );
       })}
     </ul>
   );
 };
-
 export default Navitems;

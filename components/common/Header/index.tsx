@@ -16,8 +16,7 @@ const Header = () => {
             />
             <span className="text-white">Tech-Nect</span>
           </Link>
-
-          <nav className="md:flex-between hidden w-full max-w-xs md:flex">
+          <nav className="">
             <Navitems />
           </nav>
         </div>
